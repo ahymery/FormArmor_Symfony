@@ -1,0 +1,36 @@
+{% extends 'client_layout.html.twig' %}
+
+{% block title %}Sessions Non Totalement Pourvues - FormArmor{% endblock %}
+
+{% block FormArmor_body %}
+    <h3><strong>SESSIONS NON TOTALEMENT POURVUES</strong></h3>
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>Formation</th>
+                <th>Date début</th>
+                <th>Nombre de Places</th>
+                <th>Nombre d'inscrits</th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for session in lesSessions %}
+            <tr>
+                <td>{{ session.formation.libelle }}</td>
+                <td>{{ session.formation.niveau }}</td>
+                <td>{{ session.formation.description }}</td>
+                <td>{{ session.date_debut|date('Y-m-d') }}</td>
+                <td>{{ session.date_fin|date('Y-m-d') }}</td>
+                <td>
+                    {% if session.nb_places > session.nb_inscrits %}
+                        <a href="{{ path('inscription', { 'id': session.id }) }}">S'inscrire</a>
+                    {% else %}
+                        <span>Complet</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
