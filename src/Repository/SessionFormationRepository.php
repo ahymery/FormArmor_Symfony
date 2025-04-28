@@ -44,20 +44,4 @@ class SessionFormationRepository extends ServiceEntityRepository
 		return $qb->getQuery()->getResult();
 	}
 
-	public function sessionsNTP()
-	{
-		// SELECT f.libelle, f.niveau, sf.date_debut, sf.nb_places, sf.nb_inscrits 
-		// FROM session_formation sf 
-		// INNER JOIN formation f ON sf.formation_id = f.id 
-		// WHERE sf.date_debut BETWEEN '2025-04-01' AND '2025-05-31' 
-		// AND sf.nb_places > sf.nb_inscrits;
-		return $this->createQueryBuilder('sf')
-        ->innerJoin('sf.sessions', 's')
-        ->where('s.date_debut BETWEEN :startDate AND :endDate')
-        ->setParameter('startDate', $startDate)
-        ->setParameter('endDate', $endDate)
-        ->getQuery()
-        ->getResult();
-	}
-
 }

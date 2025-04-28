@@ -39,6 +39,9 @@ class Formation
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: PlanFormation::class)]
     private Collection $plans;
 
+    #[ORM\OneToMany(mappedBy: 'sessions', targetEntity: SessionFormation::class)]
+    private Collection $sessions;
+
     public function __construct()
     {
         $this->plans = new ArrayCollection();

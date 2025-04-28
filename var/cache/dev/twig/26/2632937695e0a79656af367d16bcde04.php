@@ -97,7 +97,20 @@ class __TwigTemplate_684f8d0fdb560de6a88b8f654719d8aa extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "FormArmor_body"));
 
         // line 6
-        yield "    
+        yield "    <h3><strong>SESSIONS DANS MON PLAN FORMATION</strong></h3>
+    <table class=\"table\">
+        <thead>
+            <tr>
+                <th>Formation</th>
+                <th>Description</th>
+                <th>Date début</th>
+                <th>Nombre de Places</th>
+                <th>Nombre d'inscrits</th>
+            </tr>
+        </thead>
+          ";
+        // line 30
+        yield "    </table>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -129,7 +142,7 @@ class __TwigTemplate_684f8d0fdb560de6a88b8f654719d8aa extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  113 => 30,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -139,7 +152,31 @@ class __TwigTemplate_684f8d0fdb560de6a88b8f654719d8aa extends Template
 {% block title %}ESPACE CLIENT - FormArmor{% endblock %}
 
 {% block FormArmor_body %}
-    
+    <h3><strong>SESSIONS DANS MON PLAN FORMATION</strong></h3>
+    <table class=\"table\">
+        <thead>
+            <tr>
+                <th>Formation</th>
+                <th>Description</th>
+                <th>Date début</th>
+                <th>Nombre de Places</th>
+                <th>Nombre d'inscrits</th>
+            </tr>
+        </thead>
+          {#
+        <tbody>
+            {% for sessions in lesSessions %}
+            <tr>
+                <td>{{ sessions.formation.libelle }} - {{ sessions.formation.niveau }}</td>  
+                <td>{{ sessions.formation.description }}</td>
+                <td>{{ sessions.dateDebut | date('d/m/Y') }} </td>
+                <td>{{ sessions.nbPlaces }}</td>
+                <td>{{ sessions.nbInscrits }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+          #}
+    </table>
 {% endblock %}", "client/session_dmpf.html.twig", "C:\\wamp64\\www\\FormArmor\\templates\\client\\session_dmpf.html.twig");
     }
 }

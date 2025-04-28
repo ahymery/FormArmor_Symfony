@@ -56,32 +56,43 @@ class ClientController extends AbstractController
     public function sessions_ntp(Request $request, ManagerRegistry $doctrine)
     {
         $this->denyAccessUnlessGranted('ROLE_CLIENT');
-        $lesSessions = $rep->createQueryBuilder('f')
-            ->innerJoin('f.sessions', 's')
-            ->where('s.date_debut BETWEEN :startDate AND :endDate')
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
-            ->getQuery()
-            ->getResult();
+        $em = $doctrine->getManager();
+		$rep = $em->getRepository(SessionFormation::class);
 
-        return $this->render('client/sessions.html.twig', ['lesSessions' => $lesSessions]);
+        $queryBuilder = $rep->createQueryBuilder('sf')
+        ->innerJoin('sf.formation', 'f')
+        ->addSelect('f')
+        ->where('sf.dateDebut BETWEEN \'2025-01-04\' AND \'2025-05-31\'')
+        ->andWhere('sf.nbPlaces > sf.nbInscrits');
+
+        $resultat = $queryBuilder->getQuery()->getResult();
+
+        return $this->render('client/session_ntp.html.twig', Array('lesSessionsNTP' => $resultat));
     }
 
 
 
     #[Route('/client/sessions/non_inscrit',name: 'sessions_ni')] # ni = Non Inscrit
-    public function sessions_ni()
+    public function sessions_ni(Request $request, ManagerRegistry $doctrine)
     {        
         $this->denyAccessUnlessGranted('ROLE_CLIENT');
+        $em = $doctrine->getManager();
+		$rep = $em->getRepository(SessionFormation::class);
 
-        return $this->render('client/session_ni.html.twig');
+        $queryBuilder = $rep->createQueryBuilder('sf')
+        ->innerJoin('sf.formation', 'f')
+        ->addSelect('f')
+        ->where('sf.dateDebut BETWEEN \'2025-01-04\' AND \'2025-05-31\'');
+        
+        $resultat = $queryBuilder->getQuery()->getResult();
+        return $this->render('client/session_ni.html.twig', Array("lesSessionsNI" => $resultat));
     }
 
     
     
     
     #[Route('/client/sessions/plan_formation',name: 'sessions_dmpf')] # dmpf = dans mon plan de formation
-    public function sessions_dmpf()
+    public function sessions_dmpf(Request $request, ManagerRegistry $doctrine)
     {
         $this->denyAccessUnlessGranted('ROLE_CLIENT');
 

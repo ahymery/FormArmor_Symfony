@@ -3,5 +3,29 @@
 {% block title %}ESPACE CLIENT - FormArmor{% endblock %}
 
 {% block FormArmor_body %}
-    
+    <h3><strong>SESSIONS DANS MON PLAN FORMATION</strong></h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Formation</th>
+                <th>Description</th>
+                <th>Date début</th>
+                <th>Nombre de Places</th>
+                <th>Nombre d'inscrits</th>
+            </tr>
+        </thead>
+          {#
+        <tbody>
+            {% for sessions in lesSessions %}
+            <tr>
+                <td>{{ sessions.formation.libelle }} - {{ sessions.formation.niveau }}</td>  
+                <td>{{ sessions.formation.description }}</td>
+                <td>{{ sessions.dateDebut | date('d/m/Y') }} </td>
+                <td>{{ sessions.nbPlaces }}</td>
+                <td>{{ sessions.nbInscrits }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+          #}
+    </table>
 {% endblock %}
